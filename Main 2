@@ -1,0 +1,50 @@
+package com.example.constraint
+
+import android.content.Intent
+import android.os.Bundle
+import android.widget.Button
+import android.widget.TextView
+import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+
+class MainActivity2 : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
+        setContentView(R.layout.activity_main2)
+
+
+        val  nomvis=findViewById<TextView>(R.id.nomb)
+        val edavis=findViewById<TextView>(R.id.eda)
+        val televis=findViewById<TextView>(R.id.tele)
+        val corrvis=findViewById<TextView>(R.id.corr)
+        val boton = findViewById<Button>(R.id.volver)
+
+        val named = intent.getStringExtra("nom")
+        val phone = intent.getStringExtra("tel")
+        val ema=intent.getStringExtra("cor")
+        val aged=intent.getStringExtra("age")
+
+
+        nomvis.text = "Nombre: $named"
+        televis.text = "Teléfono: $phone"
+        corrvis.text = "Correo: $ema"
+        edavis.text = "Edad: $aged"
+
+        boton.setOnClickListener{
+            val i = Intent(this,MainActivity::class.java);
+            startActivity(i)
+        }
+
+
+
+
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
+            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            insets
+        }
+    }
+}
